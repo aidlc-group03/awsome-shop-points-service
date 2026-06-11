@@ -1,15 +1,16 @@
 package com.awsome.shop.point.application.api.dto.points.request;
 
-import com.awsome.shop.point.facade.http.request.common.GatewayInjectableRequest;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import lombok.Data;
 
 /**
  * 交易记录查询请求
+ *
+ * <p>Gateway 注入 operatorId 作为当前登录用户的ID</p>
  */
 @Data
-public class TransactionQueryRequest implements GatewayInjectableRequest {
+public class TransactionQueryRequest {
 
     @Min(value = 1, message = "页码最小为1")
     private Integer page = 1;
@@ -21,8 +22,6 @@ public class TransactionQueryRequest implements GatewayInjectableRequest {
     /** 交易类型筛选（可选） */
     private String type;
 
-    // Gateway 注入字段
-    private Long tenantId;
-    private String traceId;
-    private String userId;
+    /** Gateway 注入: 当前登录用户ID */
+    private String operatorId;
 }

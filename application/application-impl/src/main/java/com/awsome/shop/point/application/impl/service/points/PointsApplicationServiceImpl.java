@@ -42,9 +42,9 @@ public class PointsApplicationServiceImpl implements PointsApplicationService {
 
     @Override
     public void adjustPoints(AdjustPointsRequest request) {
-        Long operatorId = request.getUserId() != null ? Long.parseLong(request.getUserId()) : null;
+        Long operatorId = request.getOperatorId() != null ? Long.parseLong(request.getOperatorId()) : null;
         pointsAccountDomainService.adjust(
-                request.getTargetUserId(),
+                request.getUserId(),
                 request.getAmount(),
                 request.getType(),
                 request.getDescription(),
@@ -55,7 +55,7 @@ public class PointsApplicationServiceImpl implements PointsApplicationService {
     @Override
     public PageResult<PointsTransactionDTO> getUserHistory(UserHistoryRequest request) {
         PageResult<PointsTransactionEntity> page = pointsAccountDomainService.getTransactions(
-                request.getTargetUserId(), null, request.getPage(), request.getSize());
+                request.getUserId(), null, request.getPage(), request.getSize());
         return page.convert(this::toTransactionDTO);
     }
 

@@ -1,6 +1,5 @@
 package com.awsome.shop.point.application.api.dto.points.request;
 
-import com.awsome.shop.point.facade.http.request.common.GatewayInjectableRequest;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -9,7 +8,7 @@ import lombok.Data;
  * 创建积分规则请求
  */
 @Data
-public class RuleCreateRequest implements GatewayInjectableRequest {
+public class RuleCreateRequest {
 
     @NotBlank(message = "规则名称不能为空")
     private String name;
@@ -24,8 +23,6 @@ public class RuleCreateRequest implements GatewayInjectableRequest {
 
     private String description;
 
-    // Gateway 注入字段
-    private Long tenantId;
-    private String traceId;
-    private String userId;
+    /** Gateway 注入: 当前操作管理员ID */
+    private String operatorId;
 }

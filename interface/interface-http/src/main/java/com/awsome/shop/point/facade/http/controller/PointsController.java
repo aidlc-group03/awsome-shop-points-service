@@ -30,7 +30,7 @@ public class PointsController {
     @Operation(summary = "查询积分余额")
     @PostMapping("/balance")
     public Result<PointsBalanceDTO> getBalance(@RequestBody BalanceQueryRequest request) {
-        Long userId = Long.parseLong(request.getUserId());
+        Long userId = Long.parseLong(request.getOperatorId());
         return Result.success(pointsApplicationService.getBalance(userId));
     }
 
@@ -38,7 +38,7 @@ public class PointsController {
     @PostMapping("/transactions")
     public Result<PageResult<PointsTransactionDTO>> getTransactions(
             @RequestBody @Valid TransactionQueryRequest request) {
-        Long userId = Long.parseLong(request.getUserId());
+        Long userId = Long.parseLong(request.getOperatorId());
         return Result.success(pointsApplicationService.getTransactions(userId, request));
     }
 }
